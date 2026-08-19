@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   global.css — MindShield AI Design System
+   Dark-mode only, premium glassmorphism aesthetic.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts import (Inter) ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Custom Properties ── */
+:root {
+  /* Background scale */
+  --bg-void:       #050710;   /* deepest background */
+  --bg-primary:    #080b14;   /* page background */
+  --bg-secondary:  #0e1220;   /* pane background */
+  --bg-surface:    #141825;   /* card / elevated surface */
+  --bg-elevated:   #1a2035;   /* modals, tooltips */
+  --bg-input:      #0f1520;   /* input fields */
+
+  /* Brand */
+  --accent:        #6366f1;   /* indigo — the "shield" color */
+  --accent-hover:  #7c7ff5;
+  --accent-dim:    rgba(99, 102, 241, 0.18);
+  --accent-glow:   rgba(99, 102, 241, 0.35);
+
+  /* Typography */
+  --text-primary:  #e2e8f0;
+  --text-secondary:#94a3b8;
+  --text-muted:    #4b5563;
+  --text-faint:    #2d3748;
+
+  /* Borders */
+  --border:        rgba(99, 102, 241, 0.12);
+  --border-strong: rgba(99, 102, 241, 0.28);
+
+  /* Risk colors */
+  --risk-low:      #eab308;   /* amber */
+  --risk-low-bg:   rgba(234, 179, 8, 0.10);
+  --risk-low-border: rgba(234, 179, 8, 0.30);
+  --risk-medium:   #f97316;   /* orange */
+  --risk-medium-bg:rgba(249, 115, 22, 0.10);
+  --risk-medium-border: rgba(249, 115, 22, 0.30);
+  --risk-high:     #ef4444;   /* red */
+  --risk-high-bg:  rgba(239, 68, 68, 0.12);
+  --risk-high-border: rgba(239, 68, 68, 0.35);
+
+  /* Chat bubbles */
+  --bubble-sent:       #4f46e5;  /* User's own messages — indigo */
+  --bubble-sent-text:  #f0f0ff;
+  --bubble-recv:       #1e2744;  /* Received messages — dark navy */
+  --bubble-recv-text:  #d4d8ef;
+
+  /* Spacing scale */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   12px;
+  --space-lg:   16px;
+  --space-xl:   24px;
+  --space-2xl:  32px;
+
+  /* Border radii */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:   0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,0.7);
+  --shadow-glow: 0 0 24px var(--accent-glow);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-mid:  250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+p { line-height: 1.6; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+textarea, input {
+  font-family: inherit;
+  outline: none;
+  border: none;
+  resize: none;
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ── Utility classes ── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── App layout ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.12) 0%, transparent 60%),
+    var(--bg-primary);
+}
+
+/* ── App header ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--space-2xl);
+  background: rgba(8, 11, 20, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.app-header__logo {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 12px rgba(99,102,241,0.6));
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+.app-header__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header__subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.app-header__tagline {
+  flex: 1;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.app-header__meta {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.app-header__badge {
+  padding: 3px var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--accent-dim);
+  color: var(--accent-hover);
+  border: 1px solid var(--border-strong);
+}
+
+.app-header__badge--privacy {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+/* ── Main two-pane layout ── */
+.app-main {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  min-height: 0;
+  height: calc(100vh - 72px);
+}
+
+/* ── Central divider ── */
+.app-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-lg);
+  flex-shrink: 0;
+}
+
+.app-divider__line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-strong), transparent);
+}
+
+.app-divider__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 3px 8px;
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── App footer ── */
+.app-footer {
+  padding: var(--space-md) var(--space-2xl);
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--bg-void);
+}

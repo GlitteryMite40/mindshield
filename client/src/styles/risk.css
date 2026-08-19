@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   risk.css — Risk badge, Layer 3 banner, and safety UI components
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Risk badge container ── */
+.risk-badge {
+  margin-top: var(--space-xs);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid transparent;
+  animation: badge-in var(--transition-slow) both;
+  max-width: 100%;
+}
+
+@keyframes badge-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Risk level color variants */
+.risk-badge--low {
+  border-color: var(--risk-low-border);
+  background: var(--risk-low-bg);
+}
+
+.risk-badge--medium {
+  border-color: var(--risk-medium-border);
+  background: var(--risk-medium-bg);
+}
+
+.risk-badge--high {
+  border-color: var(--risk-high-border);
+  background: var(--risk-high-bg);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+}
+
+/* ── Badge header (always visible, clickable to expand) ── */
+.risk-badge__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  background: transparent;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.risk-badge__header:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.risk-badge__icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.risk-badge__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.risk-badge--low    .risk-badge__label { color: var(--risk-low); }
+.risk-badge--medium .risk-badge__label { color: var(--risk-medium); }
+.risk-badge--high   .risk-badge__label { color: var(--risk-high); }
+
+.risk-badge__layer-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.risk-badge__category {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.risk-badge__chevron {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ── Badge expanded body ── */
+.risk-badge__body {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  animation: expand-in var(--transition-mid) both;
+}
+
+@keyframes expand-in {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 600px; }
+}
+
+.risk-badge__explanation {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+
+.risk-badge__rec-action {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.risk-badge__rec-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Confidence + disclaimer (Gap 3) */
+.risk-badge__confidence {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--space-sm);
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.risk-badge__confidence > span:first-child {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.risk-badge__disclaimer {
+  font-size: 0.68rem !important;
+  color: var(--text-muted) !important;
+  font-style: italic;
+  font-weight: 400 !important;
+  line-height: 1.4;
+}
+
+/* "Why am I seeing this?" signals */
+.risk-badge__signals {
+  font-size: 0.78rem;
+}
+
+.risk-badge__signals summary {
+  cursor: pointer;
+  color: var(--text-secondary);
+  user-select: none;
+  font-weight: 500;
+  padding: 3px 0;
+  outline: none;
+}
+
+.risk-badge__signals summary:hover {
+  color: var(--text-primary);
+}
+
+.risk-badge__signals ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--space-sm);
+}
+
+.risk-badge__signal-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-family: monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Help Me Respond button */
+.risk-badge__help-btn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--accent-hover);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  transition: all var(--transition-fast);
+  align-self: flex-start;
+}
+
+.risk-badge__help-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  transform: translateX(2px);
+}
+
+/* ── Layer 3 persistent banner (non-dismissible without acknowledgment) ── */
+.risk-layer3-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: linear-gradient(135deg, rgba(239,68,68,0.18), rgba(239,68,68,0.08));
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  animation: layer3-pulse 2s ease-in-out infinite;
+}
+
+@keyframes layer3-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+  50%       { box-shadow: 0 0 0 4px rgba(239,68,68,0.15); }
+}
+
+.risk-layer3-banner__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  animation: shake 0.5s ease-in-out 2;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  25%       { transform: rotate(-8deg); }
+  75%       { transform: rotate(8deg); }
+}
+
+.risk-layer3-banner__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.risk-layer3-banner__title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fca5a5;
+}
+
+.risk-layer3-banner__body {
+  font-size: 0.8rem;
+  color: #fecaca;
+  line-height: 1.5;
+}
+
+.risk-layer3-banner__action {
+  font-size: 0.78rem;
+  color: #fecaca;
+  margin-top: 4px;
+}
+
+.risk-layer3-banner__ack {
+  flex-shrink: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(239,68,68,0.25);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: var(--radius-md);
+  color: #fca5a5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  align-self: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.risk-layer3-banner__ack:hover {
+  background: rgba(239,68,68,0.4);
+  border-color: rgba(239,68,68,0.7);
+  color: white;
+}
