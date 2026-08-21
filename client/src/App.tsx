@@ -134,7 +134,6 @@ export default function App() {
           Real-time awareness. You stay in control.
         </div>
         <div className="app-header__meta">
-          <span className="app-header__badge">IDEAS 5.0 Prototype</span>
           <span className="app-header__badge app-header__badge--privacy">🔒 Privacy-first</span>
         </div>
       </header>
@@ -177,8 +176,11 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>MindShield AI does not store conversations after your session ends. · IDEAS 5.0 · 2025</p>
+        <p>MindShield AI does not store conversations after your session ends. · 2026</p>
       </footer>
+
+      {/* ── Decorative orb — absolutely positioned, out of flex flow ── */}
+      <div className="app-orb" aria-hidden="true" />
     </div>
   );
 }

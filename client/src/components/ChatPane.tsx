@@ -51,10 +51,11 @@ export function ChatPane({
   const [showDemo, setShowDemo] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to latest message
+  // Auto-scroll to latest message — block:'nearest' prevents page-level scroll
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   }, [messages, signals, analyzing]);
+
 
   function handleSend() {
     const trimmed = inputText.trim();

@@ -26,7 +26,7 @@ const CANDIDATE_MODELS: string[] = Array.from(
       'gemini-1.5-flash',
       'gemini-2.5-flash',
       'gemini-1.5-flash-8b',
-    ].filter((m): m is string => Boolean(m) && m.length > 0)
+    ].filter((m): m is string => typeof m === 'string' && m.length > 0)
   )
 );
 
